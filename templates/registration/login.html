@@ -1,0 +1,25 @@
+<html>
+  <body>
+    {% if user.is_authenticated %}
+      <p>Current user: {{ user.email }} </p>
+      <div>
+        <hr>
+        <p>claims: {{ user.data_claims }}</p>
+        <hr>
+        <hr>
+        <p>email: {{ request.user }}</p>
+        <hr>
+        <p>cookies: {{ request.COOKIES }}</p>
+        <hr>
+
+      </div>
+      
+      
+      <form action="{% url 'oidc_logout' %}" method="post">{% csrf_token %}
+        <input type="submit" value="logout">
+      </form>
+    {% else %}
+      <a href="{% url 'oidc_authentication_init' %}">Login</a>
+    {% endif %}
+  </body>
+</html>
